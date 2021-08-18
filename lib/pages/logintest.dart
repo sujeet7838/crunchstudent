@@ -34,26 +34,39 @@ class _LoginPageState extends State<LoginTestPage> {
       'username':email,
       'password': pass,
       'loginType': "2",
-      // 'name':"Paris",
-      // 'lat':"88.258",
-      // 'lng':"22.587",
-      // 'deviceToken':"12345kjhk",
-      // 'deviceType':"android"
     };
+    //   Map data = {
+    //   'input': email,
+    //   'password': pass,
+    //   'user_type': "2",
+    //   'name':"Paris",
+    //   'lat':"88.258",
+    //   'lng':"22.587",
+    //   'deviceToken':"12345kjhk",
+    //   'deviceType':"android"o
+    // };
+    //http://airport-paris-cab.com/api/paris/login
     var jsonResponse = null;
      var response = await http.post(Uri.parse('https://crunchtutor.com/api/login'), body: data);
       debugPrint(response.statusCode.toString() );
-      print(response);
+      print(response.statusCode);
     if (_formKey.currentState!.validate()) {
-      setState(() {
+      if(response.statusCode==200){
+       setState(() {
         changeButton = true;
       });
       await Future.delayed(Duration(seconds: 1));
       await Navigator.pushNamed(context,MyRoutes.homeRoute);
-      
+       setState(() {
+        changeButton = false;
+      });
+      }else if(response.statusCode==200){
       setState(() {
         changeButton = false;
       });
+      }
+    
+   
     }
     // debugPrint(response.statusCode.toString() );
     // if(response.statusCode ==200) {

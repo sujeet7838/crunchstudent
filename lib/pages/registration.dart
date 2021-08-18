@@ -10,6 +10,7 @@ class RegistartionPage extends StatefulWidget {
 }
 
 class _RegistartionPageState extends State<RegistartionPage> {
+    var grade1,grade2;
     String radioButtonItem = 'Monthly';
     int id = 1;
     int id1 = 1;
@@ -48,23 +49,22 @@ class _RegistartionPageState extends State<RegistartionPage> {
             child: Column(
                crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                 SizedBox(
-                        height: 40.0,
-                      ),
-        
-               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 35.0),
-               child:Text(
-                  "Sign Up",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: darkBlueText,
-                  ),
-                ),
-                ),
-                  Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 35.0),
+                            SizedBox(
+                                    height: 40.0,
+                                  ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 35.0),
+                            child:Text(
+                                "Sign Up",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: darkBlueText,
+                                ),
+                              ),
+                              ),
+                            Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 35.0),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -92,8 +92,6 @@ class _RegistartionPageState extends State<RegistartionPage> {
                             }),
                                 ],
                               ),
-
-            
                   ),
               
                     Padding(
@@ -382,6 +380,7 @@ class _RegistartionPageState extends State<RegistartionPage> {
                                             children: <Widget>[
                                               Container(
                                                 width: 180,
+                                                 height: 50,
                                                 padding: EdgeInsets.fromLTRB(5, 5, 5, 0),
                                                   child: new TextFormField(
                                                  // controller: Product,
@@ -393,6 +392,7 @@ class _RegistartionPageState extends State<RegistartionPage> {
                                               ),
                                               Container(
                                                 width: 120,
+                                                 height: 50,
                                                 padding: EdgeInsets.fromLTRB(5, 5, 5, 0),
                                                   child:InputDecorator(
                                                   decoration: InputDecoration(
@@ -400,7 +400,8 @@ class _RegistartionPageState extends State<RegistartionPage> {
                                                           contentPadding: EdgeInsets.all(10),),
                                                       child: DropdownButtonHideUnderline(
                                                           child: DropdownButton<String>(
-                                                            value:  _gradeValues.first,
+                                                            hint: Text("Grade"),
+                                                            value:this.grade1,
                                                               isDense: true,
                                                               isExpanded: true,
                                                         items: _gradeValues
@@ -409,8 +410,10 @@ class _RegistartionPageState extends State<RegistartionPage> {
                                                                 value: value,
                                                               ))
                                                           .toList(),
-                                                              onChanged: (newValue) {
+                                                              onChanged: (val) {
                                                                   setState(() {
+                                                                   this.grade1 = val;
+                                                                   print(val);
                                                                   });
                                                               },
                                                           ),
@@ -428,6 +431,7 @@ class _RegistartionPageState extends State<RegistartionPage> {
                                             children: <Widget>[
                                               Container(
                                                 width: 180,
+                                                height: 50,
                                                 padding: EdgeInsets.fromLTRB(5, 5, 5, 0),
                                                   child: new TextFormField(
                                                  // controller: Product,
@@ -439,6 +443,7 @@ class _RegistartionPageState extends State<RegistartionPage> {
                                               ),
                                               Container(
                                                 width: 120,
+                                                height: 50,
                                                 padding: EdgeInsets.fromLTRB(5, 5, 5, 0),
                                                   child:InputDecorator(
                                                   decoration: InputDecoration(
@@ -446,7 +451,8 @@ class _RegistartionPageState extends State<RegistartionPage> {
                                                           contentPadding: EdgeInsets.all(10),),
                                                       child: DropdownButtonHideUnderline(
                                                           child: DropdownButton<String>(
-                                                            value:  _gradeValues.first,
+                                                            hint: Text("Grade"),
+                                                            value: this.grade2,
                                                               isDense: true,
                                                               isExpanded: true,
                                                         items: _gradeValues
@@ -455,8 +461,9 @@ class _RegistartionPageState extends State<RegistartionPage> {
                                                                 value: value,
                                                               ))
                                                           .toList(),
-                                                              onChanged: (newValue) {
+                                                              onChanged: (val) {
                                                                   setState(() {
+                                                                    this.grade2=val;
                                                                   });
                                                               },
                                                           ),
