@@ -67,7 +67,12 @@ class _ForgotPageState extends State<ForgotPage> {
                       vertical: 16.0, horizontal: 32.0),
                   child: Column(
                     children: [
+                      
                       TextFormField(
+                         style: TextStyle(
+                          fontSize: 11.0,
+                          height: 1.0,
+                        ),
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                           hintText: "Enter email",

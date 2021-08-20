@@ -1,12 +1,13 @@
+import 'dart:convert';
 import 'package:crunchstudent/utils/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
-class LoginTestPage extends StatefulWidget {
 
+class LoginTestPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
-
 class _LoginPageState extends State<LoginTestPage> {
   String name = "";
   bool changeButton = false;
@@ -15,41 +16,20 @@ class _LoginPageState extends State<LoginTestPage> {
   static Color darkBlueText = Color(0xff032b49);
   final TextEditingController emailController = new TextEditingController();
   final TextEditingController passwordController = new TextEditingController();
-  // String _password;
-    // Toggles the password show status
-  // void _togglePasswordStatus() {
-  //   setState(() {
-  //     _obscureText = !_obscureText;
-  //   });
-  //  String email;
-  //  String password;
-
   final _formKey = GlobalKey<FormState>();
 
+  //Api Integration Method
   moveToHome(BuildContext context,String email,pass) async {
-   print(email);
-   print(pass);
- //  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
       Map data = {
       'username':email,
       'password': pass,
       'loginType': "2",
     };
-    //   Map data = {
-    //   'input': email,
-    //   'password': pass,
-    //   'user_type': "2",
-    //   'name':"Paris",
-    //   'lat':"88.258",
-    //   'lng':"22.587",
-    //   'deviceToken':"12345kjhk",
-    //   'deviceType':"android"o
-    // };
-    //http://airport-paris-cab.com/api/paris/login
     var jsonResponse = null;
      var response = await http.post(Uri.parse('https://crunchtutor.com/api/login'), body: data);
-      debugPrint(response.statusCode.toString() );
+      jsonResponse = json.decode(response.body);
       print(response.statusCode);
+       print(jsonResponse);
     if (_formKey.currentState!.validate()) {
       if(response.statusCode==200){
        setState(() {
@@ -60,35 +40,14 @@ class _LoginPageState extends State<LoginTestPage> {
        setState(() {
         changeButton = false;
       });
-      }else if(response.statusCode==200){
+      }else if(response.statusCode==203){
       setState(() {
         changeButton = false;
+        showToastMessage("Incorrect Email Id OR Password.");
       });
       }
     
-   
     }
-    // debugPrint(response.statusCode.toString() );
-    // if(response.statusCode ==200) {
-    //   //jsonResponse = json.decode(response.body);
-    //   jsonResponse = json.decode(response.body);
-    //   print(jsonResponse);
-  
-    //   if(jsonResponse != null) {
-    //     setState(() {
-    //      // _isLoading = false;
-    //     });
-    //     //print(jsonResponse['success']['token']);
-    //   // sharedPreferences.setString("token", jsonResponse['success']['token']);
-    //     await Navigator.pushNamed(context,MyRoutes.homeRoute);
-        
-    //   }
-    // }else {
-    //   setState(() {
-    //   //  _isLoading = false;
-    //   });
-    //   print(response.body);
-    // }
   }
 
   @override
@@ -146,20 +105,19 @@ class _LoginPageState extends State<LoginTestPage> {
                     children: [
                       TextFormField(
                           style: TextStyle(
-                            fontSize: 11.0,
+                          fontSize: 11.0,
                            height: 1.0,                
                            ),
-                       controller: emailController,
-                        decoration: InputDecoration(
+                          controller: emailController,
+                          decoration: InputDecoration(
                           hintText: "Enter user name",
-                          labelText: "User name",
+                          labelText: "User Name",
                           border: OutlineInputBorder(),
-                      suffixIcon: Icon(
-                      Icons.check,
-                    ),
-                      
-                        ),
-                        validator: (value) {
+                          suffixIcon: Icon(
+                          Icons.check,
+                           ),
+                          ),
+                          validator: (value) {
                           if (value!.isEmpty) {
                             return "User name cannot be empty";
                           }else if (value.length < 6) {
@@ -219,13 +177,6 @@ class _LoginPageState extends State<LoginTestPage> {
                             BorderRadius.circular(changeButton ? 50 : 8),
                         child: InkWell(
                           onTap: () => moveToHome(context,emailController.text, passwordController.text),
-                            //  onTap: emailController.text == "" || passwordController.text == "" ? null : () {
-                            //       // setState(() {
-                            //       //   _isLoading = true;
-                            //       // });
-                            //       moveToHome(context,emailController.text, passwordController.text);
-                            //     },
-                          
                           child: AnimatedContainer(
                             duration: Duration(seconds: 1),
                             width: changeButton ? 50 : 250,
@@ -290,5 +241,16 @@ class _LoginPageState extends State<LoginTestPage> {
         ));
 
         
+  }
+  void showToastMessage(String message){
+     Fluttertoast.showToast(
+        msg: message, //message to show toast
+        toastLength: Toast.LENGTH_LONG, //duration for message to show
+        gravity: ToastGravity.BOTTOM, //where you want to show, top, bottom
+        timeInSecForIosWeb: 3, //for iOS only
+        backgroundColor: Colors.red, //background Color for message
+        textColor: Colors.white, //message text color
+        fontSize: 25.0 //message font size
+    );
   }
 }

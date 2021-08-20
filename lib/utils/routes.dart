@@ -7,4 +7,5 @@ class MyRoutes {
   static String skipRoute = "/skip";
    static String forgotRoute = "/forgot";
    static String verifyRoute = "/verify";
+    static String registrationnewRoute = "/registrationnew";
 }

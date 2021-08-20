@@ -1,5 +1,6 @@
 import 'package:crunchstudent/pages/forgot_page.dart';
 import 'package:crunchstudent/pages/logintest.dart';
+import 'package:crunchstudent/pages/registrationnew.dart';
 import 'package:crunchstudent/pages/skip_page.dart';
 import 'package:crunchstudent/pages/splash_page.dart';
 import 'package:crunchstudent/pages/verifyoto_page.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: MyTheme.lightTheme(context),
       darkTheme: MyTheme.darkTheme(context),
       debugShowCheckedModeBanner: false,
-      initialRoute: MyRoutes.logintestRoute,
+      initialRoute: MyRoutes.splashRoute,
       routes: {
         "/": (context) => LoginPage(),
         MyRoutes.homeRoute: (context) => HomePage(),
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         MyRoutes.skipRoute: (context) => SkipPage(),
         MyRoutes.forgotRoute: (context) => ForgotPage(),
         MyRoutes.verifyRoute: (context) => VerifyPage(),
+         MyRoutes.registrationnewRoute: (context) => Registrationnew(),
        
       },
     );

@@ -8,9 +8,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-     final List<String> _mainsublectValues = ['Main Subject','IOS','Flutter','Node','Java','Python','PHP']; //T
-     final List<String> _secondublectValues = ['Second Subject','Android','Flutter','Node','Java','Python','PHP']; 
-     final List<String> _gradeValues = ['Grade','1','2','3','4','5','6','7','8','9']; 
+   var mainsub, secondsub,grade;
+     final List<String> _mainsublectValues = ['Chemstry','History','Math']; //T
+     final List<String> _secondublectValues = ['Organic chemistry','Algebra','Indian History']; 
+     final List<String> _gradeValues = ['Class 1','Class 2','Class 3','Class 4','Class 5','Class 6','Class 7','Class 8','Class 9']; 
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +51,7 @@ class _HomePageState extends State<HomePage> {
       Card(
         color: Colors.white,
         margin: EdgeInsets.all(20),
-        elevation: 10,
+        elevation: 15,
         child: SizedBox(
         height: 630, 
         child: Container(
@@ -78,7 +79,8 @@ class _HomePageState extends State<HomePage> {
             ),
             child: DropdownButtonHideUnderline(
                 child: DropdownButton<String>(
-                  value:  _mainsublectValues.first,
+                   hint: Text("Main Subject"),
+                  value:this.mainsub,
                     isDense: true,
                     isExpanded: true,
                items: _mainsublectValues
@@ -89,6 +91,7 @@ class _HomePageState extends State<HomePage> {
                 .toList(),
                     onChanged: (newValue) {
                         setState(() {
+                          this.mainsub = newValue;
                         });
                     },
                 ),
@@ -103,7 +106,8 @@ class _HomePageState extends State<HomePage> {
                 contentPadding: EdgeInsets.all(10),),
             child: DropdownButtonHideUnderline(
                 child: DropdownButton<String>(
-                  value:  _secondublectValues.first,
+                    hint: Text("Second Subject"),
+                  value:this.secondsub,
                     isDense: true,
                     isExpanded: true,
                items: _secondublectValues
@@ -112,8 +116,9 @@ class _HomePageState extends State<HomePage> {
                       value: value,
                     ))
                 .toList(),
-                    onChanged: (newValue) {
+                    onChanged: (val) {
                         setState(() {
+                          this.secondsub=val;
                         });
                     },
                 ),
@@ -128,7 +133,8 @@ class _HomePageState extends State<HomePage> {
                 contentPadding: EdgeInsets.all(10),),
             child: DropdownButtonHideUnderline(
                 child: DropdownButton<String>(
-                  value:  _gradeValues.first,
+                    hint: Text("Grade"),
+                    value:this.grade,
                     isDense: true,
                     isExpanded: true,
                items: _gradeValues
@@ -137,8 +143,9 @@ class _HomePageState extends State<HomePage> {
                       value: value,
                     ))
                 .toList(),
-                    onChanged: (newValue) {
+                    onChanged: (val) {
                         setState(() {
+                          this.grade=val;
                         });
                     },
                 ),
