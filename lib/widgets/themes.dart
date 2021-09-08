@@ -13,6 +13,12 @@ class MyTheme {
       canvasColor: creamColor,
       // buttonColor: darkBluishColor,
       // accentColor: darkBluishColor,
+             timePickerTheme: TimePickerThemeData(
+          backgroundColor: Colors.white,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          hourMinuteShape: CircleBorder(),
+        ),
       appBarTheme: AppBarTheme(
         color: Colors.white,
         elevation: 0.0,

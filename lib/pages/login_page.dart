@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:url_launcher/url_launcher.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -17,8 +18,11 @@ class LoginPage extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
 }
+
 class _LoginState extends State<LoginPage> {
+  late SharedPreferences sharedPreferences;
   String name = "";
+  late final String userData;
   bool changeButton = false;
   bool _passwordVisible = false;
   static Color darkBluebtn = Color(0xff3049ac);
@@ -29,25 +33,30 @@ class _LoginState extends State<LoginPage> {
 
   //Api Integration Method
   moveToHome(BuildContext context, String email, pass) async {
+       sharedPreferences = await SharedPreferences.getInstance();
     Map data = {
       'username': email,
       'password': pass,
-      'loginType': "2",
+      //'loginType': "2",
     };
+
     var jsonResponse = null;
-    var response = await http
-        .post(Uri.parse('https://crunchtutor.com/api/login'), body: data);
-    jsonResponse = json.decode(response.body);
-    print(response.statusCode);
     if (_formKey.currentState!.validate()) {
+      var response = await http
+          .post(Uri.parse('https://crunchtutor.com/api/login'), body: data);
+      jsonResponse = json.decode(response.body);
+      print(jsonResponse);
+      print(response.statusCode);
       if (response.statusCode == 200) {
         setState(() {
           changeButton = true;
-           showToastMessage(
-              "User was successfully login!");
+           sharedPreferences.setString("UserData", response.body);
+          sharedPreferences.commit();
+          showToastMessage("User was successfully login!");
         });
         await Future.delayed(Duration(seconds: 2));
         await Navigator.pushNamed(context, MyRoutes.homeRoute);
+
         setState(() {
           changeButton = false;
         });
@@ -216,7 +225,7 @@ class _LoginState extends State<LoginPage> {
                             Text("Forgot password?",
                                 style: TextStyle(
                                   color: Color(0xff3049ac),
-                                fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.bold,
                                   backgroundColor: Colors.white,
                                 )),
                           ],
@@ -237,7 +246,7 @@ class _LoginState extends State<LoginPage> {
                               "Dnon't have an account ? ",
                               style: TextStyle(
                                 color: darkBlueText,
-                                  fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.bold,
                                 backgroundColor: Colors.white,
                               ),
                             ),
@@ -272,7 +281,7 @@ class _LoginState extends State<LoginPage> {
         timeInSecForIosWeb: 1, //for iOS only
         backgroundColor: Colors.blue, //background Color for message
         textColor: Colors.white, //message text color
-        fontSize: 18.0 //message font size
+        fontSize: 15.0 //message font size
         );
   }
 }

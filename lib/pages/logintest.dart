@@ -23,13 +23,14 @@ class _LoginPageState extends State<LoginTestPage> {
       Map data = {
       'username':email,
       'password': pass,
-      'loginType': "2",
+      //'loginType': "2",
     };
     var jsonResponse = null;
      var response = await http.post(Uri.parse('https://crunchtutor.com/api/login'), body: data);
-      jsonResponse = json.decode(response.body);
-      print(response.statusCode);
-       print(jsonResponse);
+     jsonResponse = json.decode(response.body);
+     // print(response.statusCode);
+       String  data1 = response.body;
+      print(' prod name - '+ jsonDecode(data1).id);
     if (_formKey.currentState!.validate()) {
       if(response.statusCode==200){
        setState(() {

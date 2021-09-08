@@ -60,7 +60,7 @@ class _RegistartionPageState extends State<RegistartionPage> {
   List<String> text = [
     "By proceeding, I agree to Crunch Tutor's Terms of Use and acknowledge that I have read the Privacy Notice.",
     "Bt proceeding, I am also consenting to recive calls or SMS messages, including by automatic dialer,from Crunch Tutor and its affiliates to the number I provide.",
-    "By proceeding,I am also agreeing to recive marketing communications(including by automatic dialer) by SMS from Crunch Tutor at the  phone number provided. These messages may promote Crunch Tutor's products and services.I understand that consent to reciving these marketing messages is not required to use Crunch Tuto's service."
+    // "By proceeding,I am also agreeing to recive marketing communications(including by automatic dialer) by SMS from Crunch Tutor at the  phone number provided. These messages may promote Crunch Tutor's products and services.I understand that consent to reciving these marketing messages is not required to use Crunch Tuto's service."
   ];
   final TextEditingController nameController = new TextEditingController();
   final TextEditingController lnameController = new TextEditingController();
@@ -70,6 +70,7 @@ class _RegistartionPageState extends State<RegistartionPage> {
   final TextEditingController phoneController = new TextEditingController();
   final TextEditingController emailController = new TextEditingController();
   final TextEditingController staddressController = new TextEditingController();
+  final TextEditingController cityController = new TextEditingController();
   final TextEditingController stateController = new TextEditingController();
   final TextEditingController zipcodeController = new TextEditingController();
   final TextEditingController cardnumberController =
@@ -91,6 +92,7 @@ class _RegistartionPageState extends State<RegistartionPage> {
       String phone,
       String email,
       String staddress,
+      String strCity,
       String state,
       String zip,
       String cardnum,
@@ -109,11 +111,12 @@ class _RegistartionPageState extends State<RegistartionPage> {
       'phone': phone,
       'password': pass,
       'street_address': staddress,
+      'city':strCity,
       'state': state,
       'zipcode': zip,
       'reg_from': '2',
       'device_id': '00000000-54b3-e7c7-0000-000046bffd97',
-      'child': '[{ "name": "sujeet", "grade": 2},{"name":"kumar", "grade":4}]',
+      'child': '[{ "name": "kumar", "grade": 8}]',
       'ipaddress': ''
     };
     var jsonResponse = null;
@@ -448,6 +451,33 @@ class _RegistartionPageState extends State<RegistartionPage> {
                           setState(() {});
                         },
                       ),
+
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      TextFormField(
+                        style: TextStyle(
+                          fontSize: 11.0,
+                          height: 1.0,
+                        ),
+                        controller: cityController,
+                        decoration: InputDecoration(
+                          hintText: "Enter city",
+                          labelText: "City",
+                          border: OutlineInputBorder(),
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "City cannot be empty";
+                          }
+
+                          return null;
+                        },
+                        onChanged: (value) {
+                          name = value;
+                          setState(() {});
+                        },
+                      ),
                       SizedBox(
                         height: 10.0,
                       ),
@@ -597,189 +627,189 @@ class _RegistartionPageState extends State<RegistartionPage> {
                       SizedBox(
                         height: 10.0,
                       ),
-                      InkWell(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              "Subscription",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: darkBlueText),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Radio(
-                            value: 1,
-                            groupValue: id,
-                            onChanged: (val) {
-                              setState(() {
-                                radioButtonItem = 'Monthly';
-                                id = 1;
-                              });
-                            },
-                          ),
-                          Text(
-                            'Monthly (\$$monthlydollars)',
-                            style: new TextStyle(
-                                fontSize: 15.0, color: Color(0xff254b6d)),
-                          ),
-                          Radio(
-                            value: 2,
-                            groupValue: id,
-                            onChanged: (val) {
-                              setState(() {
-                                radioButtonItem = 'Yearly';
-                                id = 2;
-                              });
-                            },
-                          ),
-                          Text(
-                            'Yearly (\$$yearlyydollars)',
-                            style: new TextStyle(
-                                fontSize: 15.0, color: Color(0xff254b6d)),
-                          ),
-                        ],
-                      ),
-                      InkWell(
-                        child: Row(
-                          children: <Widget>[
-                            Text(
-                              "Credit Card Information",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.normal, fontSize: 11),
-                            ),
-                            Text(
-                              "(will be directly recorded into",
-                              style: TextStyle(
-                                  color: Color(0xff2f4aad), fontSize: 11),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 0.0, horizontal: 0.0),
-                        child: Text(
-                          "the globally accepted Heartland Payment Portal)",
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.normal,
-                            color: Color(0xff2f4aad),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      TextFormField(
-                        style: TextStyle(
-                          fontSize: 11.0,
-                          height: 1.0,
-                        ),
-                        controller: cardnumberController,
-                        decoration: InputDecoration(
-                          hintText: "Enter card number",
-                          labelText: "Card Number",
-                          border: OutlineInputBorder(),
-                        ),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "card number cannot be empty";
-                          }
-                          return null;
-                        },
-                        onChanged: (value) {
-                          name = value;
-                          setState(() {});
-                        },
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      TextFormField(
-                        style: TextStyle(
-                          fontSize: 11.0,
-                          height: 1.0,
-                        ),
-                        controller: malingaddressController,
-                        decoration: InputDecoration(
-                          hintText: "Enter mailing address",
-                          labelText: "Mailing Address",
-                          border: OutlineInputBorder(),
-                        ),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "mailing address cannot be empty";
-                          }
-                          return null;
-                        },
-                        onChanged: (value) {
-                          name = value;
-                          setState(() {});
-                        },
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      TextFormField(
-                        style: TextStyle(
-                          fontSize: 11.0,
-                          height: 1.0,
-                        ),
-                        controller: expiredateController,
-                        decoration: InputDecoration(
-                          hintText: "Enter expiration date",
-                          labelText: "Expiration Date ",
-                          border: OutlineInputBorder(),
-                          suffixIcon: Icon(
-                            Icons.date_range,
-                          ),
-                        ),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "expiration date cannot be empty";
-                          }
+                      // InkWell(
+                      //   child: Row(
+                      //     mainAxisAlignment: MainAxisAlignment.start,
+                      //     children: <Widget>[
+                      //       Text(
+                      //         "Subscription",
+                      //         style: TextStyle(
+                      //             fontWeight: FontWeight.bold,
+                      //             color: darkBlueText),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.start,
+                      //   children: <Widget>[
+                      //     Radio(
+                      //       value: 1,
+                      //       groupValue: id,
+                      //       onChanged: (val) {
+                      //         setState(() {
+                      //           radioButtonItem = 'Monthly';
+                      //           id = 1;
+                      //         });
+                      //       },
+                      //     ),
+                      //     Text(
+                      //       'Monthly (\$$monthlydollars)',
+                      //       style: new TextStyle(
+                      //           fontSize: 15.0, color: Color(0xff254b6d)),
+                      //     ),
+                      //     Radio(
+                      //       value: 2,
+                      //       groupValue: id,
+                      //       onChanged: (val) {
+                      //         setState(() {
+                      //           radioButtonItem = 'Yearly';
+                      //           id = 2;
+                      //         });
+                      //       },
+                      //     ),
+                      //     Text(
+                      //       'Yearly (\$$yearlyydollars)',
+                      //       style: new TextStyle(
+                      //           fontSize: 15.0, color: Color(0xff254b6d)),
+                      //     ),
+                      //   ],
+                      // ),
+                      // InkWell(
+                      //   child: Row(
+                      //     children: <Widget>[
+                      //       Text(
+                      //         "Credit Card Information",
+                      //         style: TextStyle(
+                      //             fontWeight: FontWeight.normal, fontSize: 11),
+                      //       ),
+                      //       Text(
+                      //         "(will be directly recorded into",
+                      //         style: TextStyle(
+                      //             color: Color(0xff2f4aad), fontSize: 11),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
+                      // Padding(
+                      //   padding: const EdgeInsets.symmetric(
+                      //       vertical: 0.0, horizontal: 0.0),
+                      //   child: Text(
+                      //     "the globally accepted Heartland Payment Portal)",
+                      //     maxLines: 2,
+                      //     overflow: TextOverflow.ellipsis,
+                      //     style: TextStyle(
+                      //       fontSize: 11,
+                      //       fontWeight: FontWeight.normal,
+                      //       color: Color(0xff2f4aad),
+                      //     ),
+                      //   ),
+                      // ),
+                      // SizedBox(
+                      //   height: 10.0,
+                      // ),
+                      // TextFormField(
+                      //   style: TextStyle(
+                      //     fontSize: 11.0,
+                      //     height: 1.0,
+                      //   ),
+                      //   controller: cardnumberController,
+                      //   decoration: InputDecoration(
+                      //     hintText: "Enter card number",
+                      //     labelText: "Card Number",
+                      //     border: OutlineInputBorder(),
+                      //   ),
+                      //   validator: (value) {
+                      //     if (value!.isEmpty) {
+                      //       return "card number cannot be empty";
+                      //     }
+                      //     return null;
+                      //   },
+                      //   onChanged: (value) {
+                      //     name = value;
+                      //     setState(() {});
+                      //   },
+                      // ),
+                      // SizedBox(
+                      //   height: 10.0,
+                      // ),
+                      // TextFormField(
+                      //   style: TextStyle(
+                      //     fontSize: 11.0,
+                      //     height: 1.0,
+                      //   ),
+                      //   controller: malingaddressController,
+                      //   decoration: InputDecoration(
+                      //     hintText: "Enter mailing address",
+                      //     labelText: "Mailing Address",
+                      //     border: OutlineInputBorder(),
+                      //   ),
+                      //   validator: (value) {
+                      //     if (value!.isEmpty) {
+                      //       return "mailing address cannot be empty";
+                      //     }
+                      //     return null;
+                      //   },
+                      //   onChanged: (value) {
+                      //     name = value;
+                      //     setState(() {});
+                      //   },
+                      // ),
+                      // SizedBox(
+                      //   height: 10.0,
+                      // ),
+                      // TextFormField(
+                      //   style: TextStyle(
+                      //     fontSize: 11.0,
+                      //     height: 1.0,
+                      //   ),
+                      //   controller: expiredateController,
+                      //   decoration: InputDecoration(
+                      //     hintText: "Enter expiration date",
+                      //     labelText: "Expiration Date ",
+                      //     border: OutlineInputBorder(),
+                      //     suffixIcon: Icon(
+                      //       Icons.date_range,
+                      //     ),
+                      //   ),
+                      //   validator: (value) {
+                      //     if (value!.isEmpty) {
+                      //       return "expiration date cannot be empty";
+                      //     }
 
-                          return null;
-                        },
-                        onChanged: (value) {
-                          name = value;
-                          setState(() {});
-                        },
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      TextFormField(
-                        style: TextStyle(
-                          fontSize: 11.0,
-                          height: 1.0,
-                        ),
-                        controller: cvvController,
-                        decoration: InputDecoration(
-                          hintText: "Enter cvv",
-                          labelText: "CVV",
-                          border: OutlineInputBorder(),
-                        ),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "cvv cannot be empty";
-                          }
+                      //     return null;
+                      //   },
+                      //   onChanged: (value) {
+                      //     name = value;
+                      //     setState(() {});
+                      //   },
+                      // ),
+                      // SizedBox(
+                      //   height: 10.0,
+                      // ),
+                      // TextFormField(
+                      //   style: TextStyle(
+                      //     fontSize: 11.0,
+                      //     height: 1.0,
+                      //   ),
+                      //   controller: cvvController,
+                      //   decoration: InputDecoration(
+                      //     hintText: "Enter cvv",
+                      //     labelText: "CVV",
+                      //     border: OutlineInputBorder(),
+                      //   ),
+                      //   validator: (value) {
+                      //     if (value!.isEmpty) {
+                      //       return "cvv cannot be empty";
+                      //     }
 
-                          return null;
-                        },
-                        onChanged: (value) {
-                          name = value;
-                          setState(() {});
-                        },
-                      ),
+                      //     return null;
+                      //   },
+                      //   onChanged: (value) {
+                      //     name = value;
+                      //     setState(() {});
+                      //   },
+                      // ),
                       SizedBox(
                         height: 10.0,
                       ),
@@ -888,6 +918,7 @@ class _RegistartionPageState extends State<RegistartionPage> {
                               phoneController.text,
                               emailController.text,
                               staddressController.text,
+                              cityController.text,
                               stateController.text,
                               zipcodeController.text,
                               cardnumberController.text,
